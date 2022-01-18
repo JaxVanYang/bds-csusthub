@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  public:
+    image: itzg/minecraft-bedrock-server
+    restart: always
+    container_name: bds_csusthub_public
+    environment:
+      EULA: "TRUE"
+      SERVER_NAME: "CSUST Hub No OP"
+      LEVEL_NAME: "csusthub-public"
+      DIFFICULTY: "hard"
+    ports:
+      - 19132:19132/udp
+    volumes:
+      - ../public:/data
+    stdin_open: true
+    tty: true
+
+  private:
+    image: itzg/minecraft-bedrock-server
+    restart: always
+    container_name: bds_csusthub_private
+    environment:
+      EULA: "TRUE"
+      SERVER_NAME: "CSUST Hub"
+      LEVEL_NAME: "csusthub-private"
+      SERVER_PORT: 22118
+      DIFFICULTY: "hard"
+      WHITE_LIST: "true"
+    ports:
+      - 22118:22118/udp
+    volumes:
+      - ../private:/data
+    stdin_open: true
+    tty: true
+
+  backup:
+    image: kaiede/minecraft-bedrock-backup
+    restart: always
+    container_name: bds_backup
+    depends_on:
+      - "public"
+      - "private"
+    environment:
+      TZ: "China/Shanghai"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../backups/mcworld:/backups
+      - ../private:/private
+      - ../public:/public

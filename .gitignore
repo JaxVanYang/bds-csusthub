@@ -1,0 +1,16 @@
+# Server directory
+data/
+public/
+private/
+
+# Backup file
+!/backups/mcworld/config.yml
+/backups
+.service_is_healthy
+*.mcworld
+
+# Backup Server log
+nohup.out
+
+# Temporary backup file
+*.bak
