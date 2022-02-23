@@ -11,7 +11,7 @@ ___
 1. Create the backup folder & change the ownership of it, or else the server's backup service will failed to work:
 
     ```shell
-    chown <user>:docker backups/mcworld
+    mkdir backups/mcworld && chown <user>:docker backups/mcworld
     ```
 
 2. Start the server
