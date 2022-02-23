@@ -28,6 +28,7 @@ services:
       SERVER_PORT: 22118
       DIFFICULTY: "hard"
       WHITE_LIST: "true"
+      ALLOW_CHEATS: "true"
     ports:
       - 22118:22118/udp
     volumes:
